@@ -28,11 +28,9 @@ const About = () => {
   const fade = useSpring({ from: { opacity: 0 }, opacity: 1 });
 
   const faqs = [
-    { question: 'Who are we?', answer: 'We are a team dedicated to bringing you the best ZKP products.' },
-    { question: 'What is authenticaster?', answer: 'Authenticaster is a service that tell you your reliability score in the farcaster ecosystem.' },
-    { question: 'What is authenticaster?', answer: 'Authenticaster is a service that tell you your reliability score in the farcaster ecosystem.' },
-    { question: 'What is authenticaster?', answer: 'Authenticaster is a service that tell you your reliability score in the farcaster ecosystem.' },
-   
+    { question: 'Who are we? What is authenticaster?', answer: 'We are a team dedicated to bringing you the best ZKP tools. Authenticaster is a service that tell you your reliability score in the launchcaster service.' },
+    { question: 'What do the reliability scores mean?', answer: '0-20%: The project lacks credibility and has minimal attention. Proceed with extreme caution. 21-40%: The project has low credibility and limited interest. Proceed with caution. 41-60%: The credibility is moderate, but proceed with caution. 61-80%: The project demonstrates high credibility, but further observation is recommended. 81-100%: The project exhibits the highest level of credibility, but due diligence is still advised. ' },
+    
 
   ];
 
