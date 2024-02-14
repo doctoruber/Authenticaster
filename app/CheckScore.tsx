@@ -122,14 +122,14 @@ const CheckScore: React.FC = () => {
                       <Content>
                           <form onSubmit={handleSubmit}>
                               <TextField 
-                                  label="Launchcaster Project URL" 
+                                  label="Launchcaster Post URL" 
                                   variant="outlined" 
                                   fullWidth 
                                   value={launchcasterUrl}
                                   onChange={(e) => setLaunchcasterUrl(e.target.value)}
                               />
                               <Button type="submit" variant="contained" style={{ marginTop: '20px' }}>
-                                  Verify Project
+                                  Verify Post
                               </Button>
                           </form>
                           {reliabilityScore && (
