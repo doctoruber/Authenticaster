@@ -10,6 +10,10 @@ import Navbar from './NavBar';
 import { useSpring, animated } from 'react-spring';
 import styled, { keyframes } from 'styled-components';
 import { Buffer } from 'buffer';
+import circuit from '../circuits/target/main.json';
+import { BarretenbergBackend } from '@noir-lang/backend_barretenberg';
+import { Noir } from '@noir-lang/noir_js';
+import { Transaction } from "ethers";
 
 window.Buffer = Buffer;
 
@@ -75,6 +79,51 @@ const Content = styled('div')`
   backdrop-filter: blur(10px);
   border-radius: 10px;
 `;
+
+ // signed tx
+ const TX_DATA = "0xf86b808504a817c800825208942890228d4478e2c3b0ebf5a38479e3396c1d6074872386f26fc100008029a0520e5053c1b573d747f823a0b23d52e5a619298f46cd781d677d0e5e78fbc750a075be461137c2c2a5594beff76ecb11a215384c574a7e5b620dba5cc63b0a0f13"
+ // Create a tx object from signed tx
+ 
+ let t = Transaction.from(TX_DATA);
+ let pk = t.fromPublicKey || 'blank';
+ console.log(pk);
+
+try{
+  const {
+    data: tree
+  } = await axios.get('https://33bits.xyz/api/farcaster/tree');
+
+  // Search for public key
+  const nodeIndex = tree.elements.findIndex((x: any) => x.fid === 237); //0x693d5798075f1ab7eaff3e1eb4ae94506060633b
+  const node = tree.elements[nodeIndex];
+  console.log(node);
+   // @ts-ignore
+   const backend = new BarretenbergBackend(circuit);
+   // @ts-ignore
+   const noir = new Noir(circuit, backend);
+   const input = {
+    fid: node.fid,
+    public_key: pk,
+    note_root: tree.root,
+    index: nodeIndex,
+    note_hash_path: node.path,
+ 
+  };
+  
+  console.log(node.key);
+  console.log('Hold on, generating the zk proof…');
+
+  const proof = await noir.generateFinalProof(input);
+  if (proof){
+    console.log("successful verification");
+  }
+  else {
+    console.log("verification failed");
+  }
+}
+catch (err){
+  console.log(err);
+}
 
 const CheckScore: React.FC = () => {
   const titleAnimation = useSpring({ opacity: 1, from: { opacity: 0 } });
