@@ -84,7 +84,8 @@ const CheckScore: React.FC = () => {
     const fetchData = async () => {
       if (!launchcasterUrl) return; 
     
-      const functionUrl = 'http://localhost:8888/.netlify/functions/fetchLaunchcasterData';
+      const functionUrl = 'https://main--authenticaster.netlify.app/.netlify/functions/fetchLaunchcasterData';
+
       const encodedUrl = encodeURIComponent(launchcasterUrl);
       try {
           const response = await axios.get(`${functionUrl}?url=${encodedUrl}`);
