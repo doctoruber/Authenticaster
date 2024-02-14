@@ -57,13 +57,13 @@ const getColorByScore = (score) => {
 const ScoreDisplay = styled(animated.div)`
   margin-top: 20px;
   padding: 20px;
-  background-color: #222;
+  background-color: #000;
   color: ${(props) => getColorByScore(props.score)};
   font-size: 24px;
   font-weight: bold;
-  text-shadow: 0px 0px 8px rgba(255, 255, 255, 0.8);
+  text-shadow: 0px 0px 8px rgba(125, 125, 125, 0.8);
   border-radius: 10px;
-  animation: ${fadeIn} 2s ease-out;
+  animation: ${fadeIn} 2.5s ease-out;
   display: inline-block;
 `;
 
