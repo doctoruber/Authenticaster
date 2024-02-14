@@ -76,8 +76,8 @@ exports.handler = async (event, context) => {
 };
 
 function calculateReliabilityScore(votes, ageInHours) {
-    const maxScoreFromVotes = 50; 
-    const maxScoreFromAge = 50;
+    const maxScoreFromVotes = 80; 
+    const maxScoreFromAge = 20;
 
     let scoreFromVotes = Math.log1p(votes) / Math.log1p(1000) * maxScoreFromVotes; 
     scoreFromVotes = Math.min(scoreFromVotes, maxScoreFromVotes);
