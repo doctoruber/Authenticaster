@@ -47,7 +47,7 @@ const CheckScoreContainer = styled('div')`
 
 const getColorByScore = (score) => {
   if (score >= 90) return '#9FFF9F'; 
-  if (score >= 80) return '#90EE90'; 
+  if (score >= 80) return '#77BB77'; 
   if (score >= 70) return '#CCCC00'; 
   if (score >= 60) return '#FFFFE0'; 
   if (score >= 50) return '#FFB6C1';
