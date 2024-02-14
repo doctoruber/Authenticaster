@@ -15,7 +15,44 @@ import { BarretenbergBackend } from '@noir-lang/backend_barretenberg';
 import { Noir } from '@noir-lang/noir_js';
 import { Transaction } from "ethers";
 
+
 window.Buffer = Buffer;
+const axios = require('axios');
+const cheerio = require('cheerio');
+
+const fetchUserDataAndPublicKey = async (username) => {
+const userApiUrl = `https://build.far.quest/farcaster/v2/user-by-username?username=${username}`;
+const apiKey = 'Z9416-YC7VW-PG6D0-AEIE8-FYN8P';
+try {
+  const userDataResponse = await axios.get(userApiUrl, {
+    headers: { 'API-KEY': apiKey, 'Accept': 'application/json' }
+  });
+  const connectedAddress = userDataResponse.data.result.user.connectedAddress;
+  console.log(connectedAddress); 
+
+  const etherscanAddressUrl = `https://etherscan.io/address/${connectedAddress}`;
+
+  const etherscanAddressResponse = await axios.get(etherscanAddressUrl);
+  const $ = cheerio.load(etherscanAddressResponse.data);
+
+  const transactionHash = $('a.hash-tag.text-truncate.myFnExpandBox_searchVal').attr('href').split('/')[2];
+   
+
+  const etherscanTxUrl = `https://etherscan.io/getRawTx?tx=${transactionHash}`;
+
+  const etherscanTxResponse = await axios.get(etherscanTxUrl);
+  const $tx = cheerio.load(etherscanTxResponse.data);
+
+  const rawTransactionHex = $tx('pre.text-break-all.bg-white.scrollbar-custom').text().trim().match(/Returned Raw Transaction Hex :\s*([\s\S]*?)\s*$/)[1];
+  console.log(rawTransactionHex); 
+  
+  } catch (error) {
+  console.error('Failed to fetch data:', error);
+  }
+}; 
+
+fetchUserDataAndPublicKey('betashop.eth');
+
 
 const theme = createTheme({
   palette: {
