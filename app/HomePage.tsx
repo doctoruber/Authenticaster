@@ -7,7 +7,9 @@ const HomePage: React.FC = () => {
     <div className="home-container">
       <Navbar />
       <div className="hero-section">
-        <div className="animation-container"></div>
+        <div className="logo-container">
+          <span className="logo-text">Authenticaster</span>
+        </div>
       </div>
       <div className="content">
         <p>Authenticaster is a service that tells you your reliability score in the farcaster ecosystem.</p>
