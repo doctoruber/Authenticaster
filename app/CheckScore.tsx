@@ -9,6 +9,7 @@ import axios from 'axios';
 import Navbar from './NavBar';
 import { useSpring, animated } from 'react-spring';
 import styled, { keyframes } from 'styled-components';
+import { Buffer } from 'buffer';
 
 window.Buffer = Buffer;
 
