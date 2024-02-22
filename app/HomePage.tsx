@@ -12,7 +12,7 @@ const HomePage: React.FC = () => {
         </div>
       </div>
       <div className="content">
-        <p>Authenticaster is a service that tells you your reliability score in the farcaster ecosystem.</p>
+        <p>Authenticaster is a service that tells you the reliability score of any post in the launchcaster service.</p>
       </div>
     </div>
   );
