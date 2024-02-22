@@ -86,13 +86,19 @@ const CheckScore: React.FC = () => {
   const fetchData = async () => {
     if (!launchcasterUrl) return;
 
+    if (!launchcasterUrl.startsWith('https://www.launchcaster.xyz')) {
+      setScoreValue(0); 
+      setReliabilityScore(`Reliability Score: 0.00%`); 
+      return; 
+    }
+
     const functionUrl = 'https://main--authenticaster.netlify.app/.netlify/functions/fetchLaunchcasterData';
     const encodedUrl = encodeURIComponent(launchcasterUrl);
     try {
       const response = await axios.get(`${functionUrl}?url=${encodedUrl}`);
       const data = response.data;
       const score = parseFloat(data.reliabilityScore);
-      setScoreValue(score); // Set numerical score for styling
+      setScoreValue(score); 
       setReliabilityScore(`Reliability Score: ${score.toFixed(2)}%`);
     } catch (error) {
       console.error('Error fetching data:', error);
